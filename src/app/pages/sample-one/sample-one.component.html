@@ -1,0 +1,220 @@
+<div class="pageContainer">
+    <div class="row pt-3 background-secondary">
+        <div class="col-12 col-lg-3 mb-2">
+            <h3 class="ps-2">Search</h3>
+        </div>
+
+        <div class="col-6 col-lg-2">
+            <div class="mb-3 row">
+                <p class="col-sm-3 col-lg-4  col-xl-3 col-form-label">Period</p>
+                <div class="col-sm-9 col-lg-8  col-xl-9">
+                    <select class="form-select" aria-label="Default select example">
+                        <option disabled>Period</option>
+                        <option selected value="1">Transmission</option>
+                        <option value="2">Period -2</option>
+                        <option value="3">Period -3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-2">
+            <div class="mb-3 row">
+                <p class="col-sm-3 col-lg-4 col-xl-3 col-form-label">Status</p>
+                <div class="col-sm-9 col-lg-8 col-xl-9">
+                    <select class="form-select" aria-label="Default select example">
+                        <option disabled>Period</option>
+                        <option selected value="1">Waiting</option>
+                        <option value="2">Status -2</option>
+                        <option value="3">Status -3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-2">
+            <div class="mb-3 row">
+                <div class=" col-sm-2 col-lg-3">
+                    <p class=" col-form-label">From</p>
+                </div>
+
+                <div class=" col-sm-10 col-lg-9">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="modelStart"
+                            ngbDatepicker #d="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button"><i
+                                class="fa-solid fa-calendar"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-2">
+            <div class="mb-3 row ">
+                <div class="col-lg-3 col-md-2 col-sm-2">
+                    <p class="col-form-label">To</p>
+                </div>
+                <div class=" col-md-10 col-sm-10 col-lg-9">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="modelEnd"
+                            ngbDatepicker #d1="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary " (click)="d1.toggle()" type="button"><i
+                                class="fa-solid fa-calendar"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-1">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-custom rounded-pill pb-2 px-3 me-1 mb-2">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tableContainer">
+        <table class="table table-hover ">
+            <thead>
+                <tr>
+                    <th scope="col"> Account</th>
+                    <th scope="col">Operation</th>
+                    <th scope="col">Symbol</th>
+                    <th class="d-none d-md-table-cell" scope="col">Description</th>
+                    <th class="d-none d-md-table-cell" scope="col">Qty</th>
+                    <th class="d-none d-md-table-cell" scope="col">Filled Qty</th>
+                    <th class="d-none d-md-table-cell" scope="col">Price</th>
+                    <th scope="col">Status</th>
+                    <th class="d-none d-md-table-cell" scope="col">Date</th>
+                    <th class="d-none d-md-table-cell" scope="col">Expiration</th>
+                    <th class="d-none d-md-table-cell" scope="col">No. Ref.</th>
+                    <th class="d-none d-md-table-cell" scope="col">Ext. Ref.</th>
+                </tr>
+            </thead>
+            <ng-container *ngFor="let row of items; let i = index">
+                <tbody>
+                    <ng-container class="accordion" id="accordion">
+                        <tr data-bs-toggle="collapse" [attr.data-bs-target]="'#row' + i" aria-expanded="false"
+                            (click)="toggleAccordion(row)">
+                            <td><span class="me-1 cursor-pointer">
+                                    <i *ngIf="!row.isOpen" class="fa-solid fa-chevron-right"></i>
+                                    <i *ngIf="row.isOpen" class="fa-solid fa-chevron-down"></i>
+                                </span> <span class="primary-color">{{row.account}}</span>
+                            </td>
+                            <td>{{row.operation}}</td>
+                            <td>{{row.symbol}}</td>
+                            <td class="d-none d-md-table-cell">{{row.description}}</td>
+                            <td class="d-none d-md-table-cell">{{row.qty}}</td>
+                            <td class="d-none d-md-table-cell">{{row.filledQty}}</td>
+                            <td class="d-none d-md-table-cell">{{row.price}}</td>
+                            <td> <i class="fa-solid fa-hourglass-start me-1 primary-color"></i>{{row.status}}</td>
+                            <td class="d-none d-md-table-cell">{{row.date}}</td>
+                            <td class="d-none d-md-table-cell">{{row.expiration}}</td>
+                            <td class="d-none d-md-table-cell">{{row.no_ref}}</td>
+                            <td class="d-none d-md-table-cell">{{row.ext_ref}}
+                                <i class="fa-solid fa-ellipsis ms-1 primary-color cursor-pointer"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="100%" class="p-0">
+
+                                <!-- if we want to close other rows when open one row. -->
+                                <!-- [ngClass]="{'show': row.isOpen===true}" -->
+                                <div class="collapse px-2" data-bs-parent="#accordion" id="row{{i}}">
+                                    <div class="d-none d-md-flex justify-content-between mb-2 pt-3">
+                                        <div>
+                                            <span class="fw-bold primary-color">{{row.firstName}} {{row.lastName}}
+                                                ( 10103ZA - US Margin )</span>
+                                            <button class="btn btn-outline-custom rounded-pill ms-3 ">Full
+                                                Review
+                                                Details
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                                        </div>
+                                        <div class="d-flex">
+                                            <button class="btn btn-custom rounded-pill me-2">ACCEPT</button>
+                                            <div ngbDropdown class="d-inline-block">
+                                                <button type="button" class="btn btn-outline-danger rounded-pill"
+                                                    id="dropdownBasic1" ngbDropdownToggle>
+                                                    Reject
+                                                </button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                                    <button ngbDropdownItem>Reject -1</button>
+                                                    <button ngbDropdownItem>Reject -2</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-block d-md-none justify-content-between mb-2 pt-3">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-bold primary-color">{{row.firstName}} {{row.lastName}}
+                                                ( 10103ZA - US Margin )</span>
+                                            <button
+                                                class="btn btn-outline-custom rounded-pill ms-3 d-none d-sm-block">Full
+                                                Review Details
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                                            <button
+                                                class="btn btn-outline-custom rounded-pill ms-3 d-block d-sm-none fs-6">Full
+                                                Review Details
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-custom rounded-pill me-2">ACCEPT</button>
+                                            <div ngbDropdown class="d-inline-block">
+                                                <button type="button" class="btn btn-outline-danger rounded-pill"
+                                                    id="dropdownBasic1" ngbDropdownToggle>
+                                                    Reject
+                                                </button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                                    <button ngbDropdownItem>Reject -1</button>
+                                                    <button ngbDropdownItem>Reject -2</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-2 table-line-height">
+                                        <div class="col-6 col-md-3">Net Amount: <span
+                                                class="fw-bold">{{row.netAmount}}</span></div>
+                                        <div class="col-6 col-md-3">Price: <span class="fw-bold">{{row.price}}</span>
+                                        </div>
+                                        <div class="col-6 col-md-3">Exchange rate: <span
+                                                class="fw-bold">{{row.exchangeRate}}</span>
+                                        </div>
+                                        <div class="col-6 col-md-3">O/S limit: <span
+                                                class="fw-bold">{{row.osLimit}}</span>
+                                        </div>
+                                        <div class="col-6 col-md-3">Reference Number: <span
+                                                class="fw-bold">{{row.no_ref}}</span>
+                                        </div>
+                                        <div class="col-6 col-md-3">Date/Time: <span class="fw-bold">{{row.date}}</span>
+                                        </div>
+                                        <div class="col-6 col-md-3">Telephone: <span
+                                                class="fw-bold">{{row.telephone}}</span></div>
+                                        <div class="col-6 col-md-3">User Id: <span class="fw-bold">{{row.userId}}</span>
+                                        </div>
+                                        <div class="col-6 d-md-none">Description: <span
+                                                class="fw-bold">{{row.description}}</span>
+                                        </div>
+                                        <div class="col-6 d-md-none">Quantity: <span class="fw-bold">{{row.qty}}</span>
+                                        </div>
+                                        <div class="col-6 d-md-none">Filled Quantity: <span
+                                                class="fw-bold">{{row.filledQty}}</span>
+                                        </div>
+                                        <div class="col-6 d-md-none">Expiration: <span
+                                                class="fw-bold">{{row.expiration}}</span></div>
+                                        <div class="col-6 d-md-none">Ext. Ref: <span
+                                                class="fw-bold">{{row.ext_ref}}</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="warnings ps-4 py-2 rounded mb-2 background-light-gray">
+                                        <p class="mb-2">Warning(s)</p>
+                                        <div *ngFor="let warn of row.warnings;" class="ps-3 warning-line-height">
+                                            <p class="mb-2">- <span>{{warn}}</span> </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-container>
+        </table>
+    </div>
+
+</div>

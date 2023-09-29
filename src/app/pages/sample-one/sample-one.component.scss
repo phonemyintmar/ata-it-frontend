@@ -1,0 +1,78 @@
+.tableContainer{
+    width: 100%; 
+    height: 120%;
+    overflow-x: auto;
+}
+
+.pageContainer{
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 120%;
+}
+
+.btn-custom {
+    background-color: #0D70C4; 
+    color: #fff; 
+    border-color: #0D70C4; 
+  }
+
+  /* Optional: Hover and focus styles */
+  .btn-custom:hover,
+  .btn-custom:focus {
+    background-color: #0b5696; /* Change the background color on hover/focus */
+    border-color: #0b5696; /* Change the border color on hover/focus */
+  }
+
+// table
+
+  .btn-outline-custom {
+    color: #1e80d5; /* Text color */
+    background-color: transparent; /* Transparent background */
+    border: 2px solid gray; /* Blue border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 0.375rem 0.75rem; /* Adjust padding as needed */
+    font-size: 1rem; /* Adjust font size as needed */
+    line-height: 1.5; /* Adjust line height as needed */
+    cursor: pointer; /* Add pointer cursor */
+    transition: background-color 0.3s, color 0.3s; /* Add smooth transition */
+  }
+  
+  /* Hover style for the button */
+  .btn-outline-custom:hover {
+    background-color: transparent; /* Background color on hover */
+    color: #1a76c4; /* Text color on hover */
+  }
+
+  .primary-color{
+    color:#0D70C4
+  }
+
+  .secondary-color{
+    color:#ededeb;
+  }
+
+  .dropdown-menu{
+    --bs-dropdown-min-width: none !important;
+  }
+
+  .background-secondary{
+    background-color: #ededeb;
+  }
+
+  .cursor-pointer{
+    cursor: pointer;
+  }
+
+
+  .background-light-gray{
+    background-color: lightgray;
+  }
+
+  .warning-line-height{
+    line-height: 1.25;
+  }
+
+  .table-line-height{
+    line-height: 1.8;
+  }
+  
